@@ -65,12 +65,12 @@ public class ExpenseController {
 
     @DeleteMapping(value = "expense/{id}", produces = {"application/json"})
     @ResponseBody
-    public ResponseEntity<String> deleteExpenseById(@PathVariable("id") long id) {
+    public ResponseEntity<Object> deleteExpenseById(@PathVariable("id") long id) {
         log.debug("request to delete expense with id: " + id);
         expenseService.deleteExpense(id);
         log.debug("successfully deleted expense with id: " + id);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("successfully deleted expense report with id: " + id);        //return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.OK).body("successfully deleted expense report with id: " + id);
 
     }
 
