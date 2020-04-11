@@ -7,7 +7,19 @@ Steps to Setup
 
 2. Create Mysql database
 
-   create database expense
+   create table expense
+   
+   
+   CREATE TABLE `expense` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `expenseReportName` varchar(45) DEFAULT NULL,
+  `expenseName` varchar(45) DEFAULT NULL,
+  `amount` int DEFAULT NULL,
+  `CreatedDate` date NOT NULL,
+  `reporterName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
 
 3. Change mysql username and password as per your installation
 
@@ -39,3 +51,9 @@ DELETE /api/expense/{id}
 
 
 You can test them using postman or any other rest client.
+
+
+API Guideline:-
+
+https://docs.google.com/document/d/1LuCAUWcAkL3M-N_Ci13HBFNC4bGEeHkNJP6F9Iq0qyU/edit?usp=sharing
+
