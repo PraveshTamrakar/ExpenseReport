@@ -1,4 +1,9 @@
-Steps to Setup
+API Guidelines with error messages:-
+
+https://docs.google.com/document/d/1LuCAUWcAkL3M-N_Ci13HBFNC4bGEeHkNJP6F9Iq0qyU/edit?usp=sharing
+
+
+Steps to Setup the project
 
 1. Clone the application
 
@@ -31,11 +36,12 @@ Steps to Setup
 4. Build and run the app using maven
 
 
-mvn spring-boot:run
+   mvn spring-boot:run
 
 
-The app will start running at http://localhost:8080.
+   The app will start running at http://localhost:8080.
 
+==============================================================================================================================================================
 
 Explore Rest APIs
 
@@ -53,9 +59,3 @@ DELETE /api/expense/{id}
 
 
 You can test them using postman or any other rest client.
-
-
-API Guideline:-
-
-https://docs.google.com/document/d/1LuCAUWcAkL3M-N_Ci13HBFNC4bGEeHkNJP6F9Iq0qyU/edit?usp=sharing
-
