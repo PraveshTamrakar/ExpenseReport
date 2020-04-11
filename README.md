@@ -3,9 +3,10 @@ Steps to Setup
 1. Clone the application
 
 git clone https://github.com/PraveshTamrakar/ExpenseReport.git
-2. Create Mysql database
 
-create database expense
+
+2. Create Mysql database
+   create database expense
 
 3. Change mysql username and password as per your installation
 
