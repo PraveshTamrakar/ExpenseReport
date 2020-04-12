@@ -1,5 +1,6 @@
 package com.assignment.expense.dao;
 
+import com.assignment.expense.constants.SQLQueryList;
 import com.assignment.expense.entity.Expense;
 import com.assignment.expense.exceptions.MySQLException;
 import com.assignment.expense.exceptions.ResourceNotFoundException;
@@ -22,7 +23,6 @@ import java.util.List;
 import java.util.Objects;
 
 
-@Transactional
 @Repository
 @Slf4j
 public class ExpenseDaoImpl implements IExpenseDao {
@@ -31,7 +31,7 @@ public class ExpenseDaoImpl implements IExpenseDao {
 
     @Override
     public List<Expense> getAllExpense() {
-        String sql = "SELECT id, amount, expenseReportName, expenseName, createdDate, reporterName FROM expense";
+        String sql = SQLQueryList.SQL_GET_ALL_EXPENSE_QUERY;
         RowMapper<Expense> rowMapper = new BeanPropertyRowMapper<>(Expense.class);
         return jdbcTemplate.query(sql, rowMapper); // Do a query on database and return all available expense data
 
@@ -40,7 +40,7 @@ public class ExpenseDaoImpl implements IExpenseDao {
     @Override
     public Expense getExpenseById(long id) {
 
-        String sql = "SELECT id, amount, expenseReportName, expenseName, createdDate, reporterName FROM expense WHERE id = ?";
+        String sql = SQLQueryList.SQL_GET_EXPENSE_BY_ID;
         RowMapper<Expense> rowMapper = new BeanPropertyRowMapper<>(Expense.class);
         Expense expense;
         try {
@@ -54,10 +54,11 @@ public class ExpenseDaoImpl implements IExpenseDao {
     }
 
     @Override
+    @Transactional
     public void addExpense(Expense expense) {
 
         expense.setCreatedDate(Date.valueOf(LocalDate.now()));
-        String sql = "INSERT INTO expense (amount, expenseReportName, expenseName, CreatedDate, reporterName) values (?, ?, ?, ?, ?)";
+        String sql = SQLQueryList.SQL_INSERT_EXPENSE;
         KeyHolder keyHolder = new GeneratedKeyHolder(); // Keyholder is being used here to get last inserted ID, which is finally being sent on response of addExpense
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
@@ -72,8 +73,9 @@ public class ExpenseDaoImpl implements IExpenseDao {
     }
 
     @Override
+    @Transactional
     public void updateExpense(Expense expense, long id) {
-        String sql = "UPDATE expense SET amount=?, expenseReportName=?, expenseName=?, reporterName =? WHERE id = ?";
+        String sql = SQLQueryList.SQL_UPDATE_BY_EXPENSE_ID;
         try {
             int numberOfUpdate = jdbcTemplate.update(sql, expense.getAmount(), expense.getExpenseReportName(), expense.getExpenseName(), expense.getExpenseReportName(), id);
             if (numberOfUpdate == 0) { // Check is to confirm if there is any expense report present with given id, if not throw an exception
@@ -87,8 +89,9 @@ public class ExpenseDaoImpl implements IExpenseDao {
     }
 
     @Override
+    @Transactional
     public void deleteExpense(long id) {
-        String sql = "DELETE FROM expense WHERE id=?";
+        String sql = SQLQueryList.SQL_DELETE_BY_EXPENSE_ID;
         try {
             int numberOfUpdate = jdbcTemplate.update(sql, id);
             if (numberOfUpdate == 0) { // Check is to confirm if there is any expense report present with given id, if not throw an exception
