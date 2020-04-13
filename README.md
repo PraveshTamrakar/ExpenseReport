@@ -19,7 +19,7 @@ Steps to Setup the project
   `id` int NOT NULL AUTO_INCREMENT,
   `expenseReportName` varchar(45) DEFAULT NULL,
   `expenseName` varchar(45) DEFAULT NULL,
-  `amount` int DEFAULT NULL,
+  `amount` bigint DEFAULT NULL,
   `CreatedDate` date NOT NULL,
   `reporterName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
